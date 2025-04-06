@@ -1,26 +1,175 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --primary: #0369a1;
+  --primary-foreground: #f0f9ff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --primary: #0ea5e9;
+  --primary-foreground: #f0f9ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+.light body {
+  background-color: white;
+  color: #171717;
+}
+
+/* Borsa tablosu stil düzenlemeleri */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th {
+  background-color: #1e293b;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.light th {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+.light td {
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.light tr:hover {
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+/* Pozitif değer (yeşil) */
+.text-positive {
+  color: #10b981;
+}
+
+/* Negatif değer (kırmızı) */
+.text-negative {
+  color: #ef4444;
+}
+
+/* Nötr değer (sarı/turuncu) */
+.text-neutral {
+  color: #f59e0b;
+}
+
+/* Özel animasyon stilleri */
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-in-out;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s infinite;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, Arial, Helvetica, sans-serif);
+}
+
+/* Geçiş efektleri için hover stil örnekleri */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-shadow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
 }
